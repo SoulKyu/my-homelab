@@ -361,9 +361,9 @@ spec:
     server: https://kubernetes.default.svc
     namespace: argocd
   sources:
-  - repoURL: 'git@github.com:SoulKyu/my-homelab.git'
+  - repoURL: 'https://github.com/SoulKyu/my-homelab.git'
     path: kubernetes/argocd/repositories
     targetRevision: main
-  - repoURL: 'git@github.com:SoulKyu/my-homelab.git'
+  - repoURL: 'https://github.com/SoulKyu/my-homelab.git'
     path: kubernetes/argocd/applications
     targetRevision: main

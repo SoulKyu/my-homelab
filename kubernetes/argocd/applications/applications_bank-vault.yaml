@@ -13,6 +13,6 @@ spec:
     server: https://kubernetes.default.svc
     namespace: vault
   sources:
-  - repoURL: 'git@github.com:SoulKyu/my-homelab.git'
+  - repoURL: 'https://github.com/SoulKyu/my-homelab.git'
     path: kubernetes/argocd/values/bank-vault
     targetRevision: main
