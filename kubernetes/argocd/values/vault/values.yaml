@@ -511,41 +511,6 @@ server:
 
         service_registration "kubernetes" {}
 
-    # config is a raw string of default configuration when using a Stateful
-    # deployment. Default is to use a Consul for its HA storage backend.
-    # Supported formats are HCL and JSON.
-
-    # Note: Configuration files are stored in ConfigMaps so sensitive data
-    # such as passwords should be either mounted through extraSecretEnvironmentVars
-    # or through a Kube secret. For more information see:
-    # https://developer.hashicorp.com/vault/docs/platform/k8s/helm/run#protecting-sensitive-vault-configurations
-    config: |
-      ui = true
-
-      listener "tcp" {
-        tls_disable = 1
-        address = "[::]:8200"
-        cluster_address = "[::]:8201"
-      }
-
-      storage "raft" {
-        path = "/vault/data"
-        retry_join {
-          auto_join_scheme = "http"
-          auto_join = "provider=k8s namespace=vault"
-        }
-      }
-
-      service_registration "kubernetes" {}
-
-      # Example configuration for enabling Prometheus metrics.
-      # If you are using Prometheus Operator you can enable a ServiceMonitor resource below.
-      # You may wish to enable unauthenticated metrics in the listener block above.
-      telemetry {
-        prometheus_retention_time = "30s"
-        disable_hostname = true
-      }
-
     # A disruption budget limits the number of pods of a replicated application
     # that are down simultaneously from voluntary disruptions
     disruptionBudget:
