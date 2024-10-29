@@ -505,7 +505,7 @@ server:
           path = "/vault/data"
           retry_join {
             auto_join_scheme = "http"
-            auto_join = "provider=k8s"
+            auto_join = "provider=k8s namespace=vault"
           }
         }
 
