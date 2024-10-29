@@ -44,6 +44,6 @@ All my secret are stored on Vault, i'm using the mutating webhook from bank-vaul
 
 Actually all my service are registered on Scaleway DNS for private and public network.
 
-Private Network is only accessible from my Homelab, in the future a Headscale configuration is going to be deployed to allow access from my secure device
+Private Network is only accessible from my Homelab, in the future a Headscale configuration is going to be deployed to allow access from my secure device.
 
 Public Network is available from outside only on port 443 to specific URL that are designed to be publically accessed such as a future portfolio for example.
