@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault
+  namespace: argocd
+spec:
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vault
+  sources:
+  - chart: 'oci://ghcr.io/bank-vaults/helm-charts/vault-operator'
+    targetRevision: v1.22.3
+    helm:
+      valueFiles:
+      - $values/kubernetes/argocd/values/vault-operartor/values.yaml
+  - repoURL: 'https://github.com/SoulKyu/my-homelab.git'
+    ref: values
+    targetRevision: main
