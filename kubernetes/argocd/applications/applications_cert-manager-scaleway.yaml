@@ -14,7 +14,7 @@ spec:
     namespace: cert-manager
   sources:
   - repoURL: 'https://helm.scw.cloud/'
-    chart: scaleway
+    chart: scaleway-certmanager-webhook
     targetRevision: 0.4.0
     helm:
       valueFiles:
