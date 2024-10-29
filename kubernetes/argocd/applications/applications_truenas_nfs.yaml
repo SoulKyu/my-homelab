@@ -22,3 +22,9 @@ spec:
   - repoURL: 'https://github.com/SoulKyu/my-homelab.git'
     ref: values
     targetRevision: main
+  - repoURL: 'https://github.com/SoulKyu/my-homelab.git'
+    path: kubernetes/argocd/values/truenas
+    targetRevision: main
+    directory:
+      recurse: true
+      exclude: 'freenas-nfs-pool01.yaml'

@@ -1,53 +1,12 @@
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: test-claim-iscsi-pool01
-  annotations:
-    volume.beta.kubernetes.io/storage-class: "freenas-iscsi-csi-pool01"
-spec:
-  storageClassName: freenas-iscsi-csi-pool01
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: test-claim-nfs-pool01
   annotations:
-    volume.beta.kubernetes.io/storage-class: "freenas-nfs-csi-pool01"
+    volume.beta.kubernetes.io/storage-class: "freenas-nfs-csi-pool1"
 spec:
-  storageClassName: freenas-nfs-csi-pool01
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: test-claim-iscsi-pool02
-  annotations:
-    volume.beta.kubernetes.io/storage-class: "freenas-iscsi-csi-pool02"
-spec:
-  storageClassName: freenas-iscsi-csi-pool02
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: test-claim-nfs-pool02
-  annotations:
-    volume.beta.kubernetes.io/storage-class: "freenas-nfs-csi-pool02"
-spec:
-  storageClassName: freenas-nfs-csi-pool02
+  storageClassName: freenas-nfs-csi-pool1
   accessModes:
     - ReadWriteOnce
   resources:
