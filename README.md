@@ -31,3 +31,11 @@ System application are deployed using the k3s helmConfig which include :
 - LongHorn
 
 All other applications are or will be deployed using ArgoCD.
+
+## My Vault Configuration
+
+My Vault server is deployed using Raft backend with Helm over ArgoCD.
+
+Vault is configured with Terraform.
+
+All my secret are stored on Vault, i'm using the mutating webhook from bank-vault to inject those secret directly inside my pods.
