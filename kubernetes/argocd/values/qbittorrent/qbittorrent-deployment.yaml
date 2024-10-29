@@ -23,40 +23,40 @@ spec:
         nameservers:
           - 9.9.9.9
       containers:
-        - name: gluetun-ivpn
-          image: qmcgaw/gluetun:latest
-          env:
-           # If you having connection issues, try enabling these variables to help diagnose it.
-           # - name: FIREWALL_DEBUG
-           #   value: "on"
-           # - name: FIREWALL_INPUT_PORTS
-           #   value: "8080"
-            - name: HEALTH_TARGET_ADDRESS
-              value: 127.0.0.1:8080
-            - name: EXTRA_SUBNETS
-              value: 10.0.0.0/8
-            - name: FIREWALL_INPUT_PORTS
-              value: "8080,6881"
-            - name: FIREWALL_OUTBOUND_SUBNETS
-              value: 10.0.0.0/8
-            - name: FIREWALL_INBOUND_SUBNETS
-              value: 10.0.0.0/8
-            - name: FIREWALL_VPN_INPUT_PORTS
-              value: "44053"
-          envFrom:
-            - secretRef:
-                name: qbittorrent-wireguard
-          securityContext:                          
-            privileged: true                        
-            capabilities:                           
-              add:                                  
-                - NET_ADMIN
-          ports:                                    
-            - containerPort: 8888                   
-            - containerPort: 8388                   
-            - containerPort: 8388                   
-              protocol: UDP                         
-            - containerPort: 8000      
+        #- name: gluetun-ivpn
+        #  image: qmcgaw/gluetun:latest
+        #  env:
+        #   # If you having connection issues, try enabling these variables to help diagnose it.
+        #   # - name: FIREWALL_DEBUG
+        #   #   value: "on"
+        #   # - name: FIREWALL_INPUT_PORTS
+        #   #   value: "8080"
+        #    - name: HEALTH_TARGET_ADDRESS
+        #      value: 127.0.0.1:8080
+        #    - name: EXTRA_SUBNETS
+        #      value: 10.0.0.0/8
+        #    - name: FIREWALL_INPUT_PORTS
+        #      value: "8080,6881"
+        #    - name: FIREWALL_OUTBOUND_SUBNETS
+        #      value: 10.0.0.0/8
+        #    - name: FIREWALL_INBOUND_SUBNETS
+        #      value: 10.0.0.0/8
+        #    - name: FIREWALL_VPN_INPUT_PORTS
+        #      value: "44053"
+        #  envFrom:
+        #    - secretRef:
+        #        name: qbittorrent-wireguard
+        #  securityContext:                          
+        #    privileged: true                        
+        #    capabilities:                           
+        #      add:                                  
+        #        - NET_ADMIN
+        #  ports:                                    
+        #    - containerPort: 8888                   
+        #    - containerPort: 8388                   
+        #    - containerPort: 8388                   
+        #      protocol: UDP                         
+        #    - containerPort: 8000      
         - name: qbittorrent
           image: lscr.io/linuxserver/qbittorrent:latest
           imagePullPolicy: Always
