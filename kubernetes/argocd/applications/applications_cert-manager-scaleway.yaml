@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-scaleway
+  namespace: argocd
+spec:
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cert-manager
+  sources:
+  - repoURL: 'https://helm.scw.cloud/'
+    chart: scaleway
+    targetRevision: 0.4.0
+    helm:
+      valueFiles:
+      - $values/kubernetes/argocd/values/cert-manager-scaleway/values.yaml
+  - repoURL: 'https://github.com/SoulKyu/my-homelab.git'
+    ref: values
+    targetRevision: main
+  - repoURL: 'https://github.com/SoulKyu/my-homelab.git'
+    path: kubernetes/argocd/values/cert-manager-scaleway
+    targetRevision: main
+    directory:
+      recurse: true
+      exclude: 'values.yaml'
