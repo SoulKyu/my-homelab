@@ -495,13 +495,18 @@ server:
           address = "[::]:8200"
           cluster_address = "[::]:8201"
           # Enable unauthenticated metrics access (necessary for Prometheus Operator)
-          #telemetry {
-          #  unauthenticated_metrics_access = "true"
-          #}
+          telemetry {
+            prometheus_retention_time = "30s"
+            unauthenticated_metrics_access = "true"
+          }
         }
 
         storage "raft" {
           path = "/vault/data"
+          retry_join {
+            auto_join_scheme = "http"
+            auto_join = "provider=k8s"
+          }
         }
 
         service_registration "kubernetes" {}
