@@ -74,8 +74,7 @@ spec:
             - containerPort: 6881
           resources:
             limits:
-              memory: "1024Mi"
-              cpu: "1000m"
+              memory: "2048Mi"
             requests:
               memory: "512Mi"
               cpu: "500m"
