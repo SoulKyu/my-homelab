@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: zfs-nfs
+  namespace: argocd
+spec:
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: democratic-csi
+  sources:
+  - repoURL: 'https://democratic-csi.github.io/charts/'
+    chart: democratic-csi
+    targetRevision: 0.14.6
+    helm:
+      valueFiles:
+      - $values/truenas/freenas-nfs-pool01.yaml
+  - repoURL: 'https://github.com/SoulKyu/my-homelab.git'
+    ref: values
+    targetRevision: main
