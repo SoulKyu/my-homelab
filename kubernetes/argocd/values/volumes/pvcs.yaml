@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: movies
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 14000Gi
+  storageClassName: freenas-nfs-csi-pool1
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: series
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 14000Gi
+  storageClassName: freenas-nfs-csi-pool1
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: downloads
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 14000Gi
+  storageClassName: freenas-nfs-csi-pool1
+  volumeMode: Filesystem
