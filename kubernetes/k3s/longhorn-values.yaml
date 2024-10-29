@@ -434,13 +434,13 @@ spec:
 
       # -- IngressClass resource that contains ingress configuration, including the name of the Ingress controller.
       # ingressClassName can replace the kubernetes.io/ingress.class annotation used in earlier Kubernetes releases.
-      ingressClassName: ~
+      ingressClassName: nginx
 
       # -- Hostname of the Layer 7 load balancer.
       host: storage.local.soulkyu.net
 
       # -- Setting that allows you to enable TLS on ingress records.
-      tls: false
+      tls: true
 
       # -- Setting that allows you to enable secure connections to the Longhorn UI service via port 443.
       secureBackends: false
@@ -463,7 +463,6 @@ spec:
       ## If tls is set to true, annotation ingress.kubernetes.io/secure-backends: "true" will automatically be set
       # -- Ingress annotations in the form of key-value pairs.
       annotations:
-        kubernetes.io/ingress.class: nginx
         cert-manager.io/cluster-issuer: scaleway
       #  kubernetes.io/tls-acme: true
 

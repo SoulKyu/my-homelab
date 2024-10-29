@@ -37,6 +37,8 @@ terraform.rc
 
 vault-keys.txt
 
+kubernetes/k3s/install_k3s.sh
+
 *.retry
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Ansible
