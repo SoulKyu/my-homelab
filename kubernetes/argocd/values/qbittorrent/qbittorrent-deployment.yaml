@@ -22,7 +22,6 @@ spec:
         vault.security.banzaicloud.io/vault-path: "kubernetes"
     spec:
       nodeSelector:
-        kubernetes.io/hostname: k8s-worker04.local.soulkyu.net
         kubernetes.io/os: linux
       dnsPolicy: "None"
       dnsConfig:
