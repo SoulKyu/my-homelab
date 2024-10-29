@@ -17,7 +17,7 @@ spec:
     targetRevision: v1.22.3
     helm:
       valueFiles:
-      - $values/kubernetes/argocd/values/vault-operartor/values.yaml
+      - $values/kubernetes/argocd/values/vault-operator/values.yaml
   - repoURL: 'https://github.com/SoulKyu/my-homelab.git'
     ref: values
     targetRevision: main
