@@ -14,5 +14,5 @@ spec:
     namespace: scalewayddns
   sources:
   - repoURL: 'https://github.com/SoulKyu/my-homelab.git'
-    path: scaleway-ddns
+    path: kubernetes/argocd/values/scaleway-ddns
     targetRevision: main
