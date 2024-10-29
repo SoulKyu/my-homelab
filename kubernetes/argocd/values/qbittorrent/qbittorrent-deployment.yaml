@@ -23,7 +23,7 @@ spec:
     spec:
       nodeSelector:
         kubernetes.io/os: linux
-      dnsPolicy: "None"
+      #dnsPolicy: "None"
       #dnsConfig:
       #  nameservers:
       #    - 9.9.9.9
