@@ -16,7 +16,7 @@ The Terramaster has been reinstalled with TrueNas using this documentation : [In
 
 ## My Kubernetes cluster
 
-All my server are part of a k3s cluster which has been setuped with the following configuration : 
+All my server are part of a k3s cluster which has been setuped with the following configuration (Ansible in-comming) : 
 
 - HaProxy and Keepalived on each Master with IP on 192.168.1.100
 - Deployed with ingress-nginx as a replacement of traefik
@@ -39,3 +39,11 @@ My Vault server is deployed using Raft backend with Helm over ArgoCD.
 Vault is configured with Terraform.
 
 All my secret are stored on Vault, i'm using the mutating webhook from bank-vault to inject those secret directly inside my pods.
+
+## Access from the Outside
+
+Actually all my service are registered on Scaleway DNS for private and public network.
+
+Private Network is only accessible from my Homelab, in the future a Headscale configuration is going to be deployed to allow access from my secure device
+
+Public Network is available from outside only on port 443 to specific URL that are designed to be publically accessed such as a future portfolio for example.
