@@ -15,6 +15,11 @@ spec:
       labels:
         app: qbittorrent
         deployed_by: argocd
+      annotations:
+        vault.security.banzaicloud.io/vault-addr: "https://vault.local.soulkyu.net:443"
+        vault.security.banzaicloud.io/vault-role: "default"
+        vault.security.banzaicloud.io/vault-skip-verify: "true"
+        vault.security.banzaicloud.io/vault-path: "kubernetes"
     spec:
       nodeSelector:
         kubernetes.io/hostname: k8s-worker04.local.soulkyu.net
@@ -43,25 +48,25 @@ spec:
             - name: FIREWALL_INBOUND_SUBNETS
               value: 10.0.0.0/8
             - name: VPN_SERVICE_PROVIDER
-              value: ivpn
+              value: ${vault:secrets/data/wireguard#VPN_SERVICE_PROVIDER}
             - name: VPN_TYPE
-              value: wireguard
+              value: ${vault:secrets/data/wireguard#VPN_TYPE}
             - name: WIREGUARD_PRIVATE_KEY
-              value: WJAGsC1TQCUGMpEtWsBpKs345UEHrxToXu4Z1rxPgH8=
+              value: ${vault:secrets/data/wireguard#WIREGUARD_PRIVATE_KEY}
             - name: WIREGUARD_ADDRESSES
-              value: 172.22.121.9/32
+              value: ${vault:secrets/data/wireguard#WIREGUARD_ADDRESSES}
             - name: SERVER_COUNTRIES
-              value: switzerland
+              value: ${vault:secrets/data/wireguard#SERVER_COUNTRIES}
             - name: SERVER_CITIES
-              value: zurich
+              value: ${vault:secrets/data/wireguard#SERVER_CITIES}
             - name: SERVER_HOSTNAMES
-              value: ch3.wg.ivpn.net
+              value: ${vault:secrets/data/wireguard#SERVER_HOSTNAMES}
             - name: VPN_ENDPOINT_PORT
-              value: "2049"
+              value: ${vault:secrets/data/wireguard#VPN_ENDPOINT_PORT}
             - name: VPN_PORT_FORWARDING
-              value: "on"
+              value: ${vault:secrets/data/wireguard#VPN_PORT_FORWARDING}
             - name: VPN_PORT_FORWARDING_PROVIDER
-              value: "protonvpn"
+              value: ${vault:secrets/data/wireguard#VPN_PORT_FORWARDING_PROVIDER}
             - name: FIREWALL_VPN_INPUT_PORTS
               value: "44053"
           securityContext:                          
