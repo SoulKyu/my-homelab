@@ -24,9 +24,9 @@ spec:
       nodeSelector:
         kubernetes.io/os: linux
       dnsPolicy: "None"
-      dnsConfig:
-        nameservers:
-          - 9.9.9.9
+      #dnsConfig:
+      #  nameservers:
+      #    - 9.9.9.9
       containers:
         - name: gluetun-ivpn
           image: qmcgaw/gluetun:latest
