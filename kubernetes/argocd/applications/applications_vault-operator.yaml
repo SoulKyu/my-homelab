@@ -13,7 +13,8 @@ spec:
     server: https://kubernetes.default.svc
     namespace: vault
   sources:
-  - chart: 'oci://ghcr.io/bank-vaults/helm-charts/vault-operator'
+  - repoURL: 'ghcr.io/bank-vaults/helm-charts'
+    path: vault-operator
     targetRevision: v1.22.3
     helm:
       valueFiles:
