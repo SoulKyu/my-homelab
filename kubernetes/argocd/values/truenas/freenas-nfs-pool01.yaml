@@ -78,8 +78,8 @@ driver:
       shareAlldirs: false
       shareAllowedHosts: []
       shareAllowedNetworks: []
-      shareMaprootUser: admin
-      shareMaprootGroup: admin
+      shareMaprootUser: root
+      shareMaprootGroup: wheel
       shareMapallUser: ""
       shareMapallGroup: ""
 
