@@ -47,25 +47,25 @@ spec:
             - name: FIREWALL_INBOUND_SUBNETS
               value: 10.0.0.0/8
             - name: VPN_SERVICE_PROVIDER
-              value: ${vault:secrets/data/wireguard#VPN_SERVICE_PROVIDER}
+              value: vault:secrets/data/wireguard#VPN_SERVICE_PROVIDER
             - name: VPN_TYPE
-              value: ${vault:secrets/data/wireguard#VPN_TYPE}
+              value: vault:secrets/data/wireguard#VPN_TYPE
             - name: WIREGUARD_PRIVATE_KEY
-              value: ${vault:secrets/data/wireguard#WIREGUARD_PRIVATE_KEY}
+              value: vault:secrets/data/wireguard#WIREGUARD_PRIVATE_KEY
             - name: WIREGUARD_ADDRESSES
-              value: ${vault:secrets/data/wireguard#WIREGUARD_ADDRESSES}
+              value: vault:secrets/data/wireguard#WIREGUARD_ADDRESSES
             - name: SERVER_COUNTRIES
-              value: ${vault:secrets/data/wireguard#SERVER_COUNTRIES}
+              value: vault:secrets/data/wireguard#SERVER_COUNTRIES
             - name: SERVER_CITIES
-              value: ${vault:secrets/data/wireguard#SERVER_CITIES}
+              value: vault:secrets/data/wireguard#SERVER_CITIES
             - name: SERVER_HOSTNAMES
-              value: ${vault:secrets/data/wireguard#SERVER_HOSTNAMES}
+              value: vault:secrets/data/wireguard#SERVER_HOSTNAMES
             - name: VPN_ENDPOINT_PORT
-              value: ${vault:secrets/data/wireguard#VPN_ENDPOINT_PORT}
+              value: vault:secrets/data/wireguard#VPN_ENDPOINT_PORT
             - name: VPN_PORT_FORWARDING
-              value: ${vault:secrets/data/wireguard#VPN_PORT_FORWARDING}
+              value: vault:secrets/data/wireguard#VPN_PORT_FORWARDING
             - name: VPN_PORT_FORWARDING_PROVIDER
-              value: ${vault:secrets/data/wireguard#VPN_PORT_FORWARDING_PROVIDER}
+              value: vault:secrets/data/wireguard#VPN_PORT_FORWARDING_PROVIDER
             - name: FIREWALL_VPN_INPUT_PORTS
               value: "44053"
           securityContext:                          
