@@ -18,10 +18,6 @@ spec:
     spec:
       nodeSelector:
         kubernetes.io/os: linux
-      dnsPolicy: "None"
-      dnsConfig:
-        nameservers:
-          - 9.9.9.9
       initContainers:
         - name: gluetun-ivpn
           restartPolicy: Always
@@ -40,8 +36,10 @@ spec:
               value: 10.0.0.0/8
             - name: FIREWALL_INPUT_PORTS
               value: "8080,6881"
+            - name: DNS_KEEP_NAMESERVER
+              value: "on"
             - name: FIREWALL_OUTBOUND_SUBNETS
-              value: 10.0.0.0/8
+              value: "10.42.0.0/15"
             - name: FIREWALL_INBOUND_SUBNETS
               value: 10.0.0.0/8
           envFrom:
@@ -52,6 +50,7 @@ spec:
             capabilities:                           
               add:                                  
                 - NET_ADMIN
+                - SYS_MODULE
           ports:                                    
             - containerPort: 8888                   
             - containerPort: 8388                   

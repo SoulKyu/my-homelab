@@ -12,6 +12,20 @@ spec:
   storageClassName: longhorn
   volumeMode: Filesystem
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gluetun-config
+  namespace: qbittorrent
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: longhorn
+  volumeMode: Filesystem
+---
 # Path : /var/lib/k8s-pvs/qbittorrent-downloads/pvc-a023eed8-f4e4-4445-8953-c6d9e214f0f8
 apiVersion: v1
 kind: PersistentVolumeClaim
