@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+  namespace: jellyfin
+spec:
+  selector:
+    matchLabels:
+      app: jellyfin
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+        deployed_by: argocd
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: k3s-server02
+      containers:
+        - name: jellyfin
+          image: lscr.io/linuxserver/jellyfin:latest
+          imagePullPolicy: Always
+          env:
+            - name: DOCKER_MODS
+              value: linuxserver/mods:jellyfin-amd
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: "TZ"
+              value: "Europe/Paris"
+            #- name: "NVIDIA_VISIBLE_DEVICES"
+            #  value: "GPU-d2d55590-eb95-fdcb-db7c-092445cd4255"
+            - name: "JELLYFIN_PublishedServerUrl"
+              value: "https://jellyfin.public.soulkyu.net"
+          ports:
+            - containerPort: 8096
+            - containerPort: 8920
+            - containerPort: 7359
+            - containerPort: 1900
+          resources:
+            limits:
+              "amd.com/gpu": 1
+            requests:
+              "amd.com/gpu": 1
+              memory: "16384Mi"
+          volumeMounts:
+          - name: dri
+            mountPath: /dev/dri
+          - mountPath: /encoding
+            name: encoding
+          - mountPath: /config
+            name: jellyfin-config
+          - mountPath: /data/tvshows
+            name: jellyfin-series
+          - mountPath: /data/movies
+            name: jellyfin-movies
+          - mountPath: /usr/share/jellyfin/web/config.json
+            name: jellyfin-configjson
+            subPath: config.json
+      volumes:
+      - name: dri
+        hostPath:
+          path: /dev/dri
+          type: Directory
+      - name: encoding
+        hostPath:
+          # directory location on host
+          path: /encoding
+          # this field is optional
+          type: Directory
+      - name: jellyfin-configjson
+        configMap:
+          name: configjson
+      - persistentVolumeClaim:
+          claimName: jellyfin-config
+        name: jellyfin-config
+      - persistentVolumeClaim:
+          claimName: jellyfin-series
+        name: jellyfin-series
+      - persistentVolumeClaim:
+          claimName: jellyfin-movies
+        name: jellyfin-movies

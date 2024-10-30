@@ -1,0 +1,45 @@
+# Password : flaresolver123*flaresolverr
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaresolverr
+  namespace: flaresolverr
+spec:
+  selector:
+    matchLabels:
+      app: flaresolverr
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: flaresolverr
+        deployed_by: argocd
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: k3s-server02
+      hostNetwork: true
+      hostAliases:
+      - ip: "104.21.64.76"
+        hostnames:
+        - "ygg.re"
+      - ip: "172.67.178.119"
+        hostnames:
+        - "ygg.re"
+      containers:
+        - name: flaresolverr
+          image: alexfozor/flaresolverr:pr-1300-experimental
+          imagePullPolicy: Always
+          env:
+            - name: CAPTCHA_SOLVER
+              value: "none"
+            - name: "TZ"
+              value: "Europe/Paris"
+          ports:
+            - containerPort: 8191
+          resources:
+            limits:
+              memory: "2048Mi"
+              cpu: "2000m"
+            requests:
+              memory: "1024Mi"
+              cpu: "1000m"
