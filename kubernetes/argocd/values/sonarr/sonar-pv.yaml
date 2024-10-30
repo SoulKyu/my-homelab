@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sonarr-downloads
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 14000Gi
+  csi:
+    controllerExpandSecretRef:
+      name: controller-expand-secret-freenas-nfs-csi-pool1-zfs-nfs-democrat
+      namespace: democratic-csi
+    controllerPublishSecretRef:
+      name: controller-publish-secret-freenas-nfs-csi-pool1-zfs-nfs-democra
+      namespace: democratic-csi
+    driver: org.democratic-csi.nfs.pool01
+    fsType: nfs
+    nodePublishSecretRef:
+      name: node-publish-secret-freenas-nfs-csi-pool1-zfs-nfs-democratic-cs
+      namespace: democratic-csi
+    nodeStageSecretRef:
+      name: node-stage-secret-freenas-nfs-csi-pool1-zfs-nfs-democratic-csi
+      namespace: democratic-csi
+    volumeAttributes:
+      node_attach_driver: nfs
+      provisioner_driver: freenas-nfs
+      provisioner_driver_instance_id: truenas
+      server: 192.168.1.200
+      share: /mnt/POOL1/k8s/vols/pvc-9e29c621-e42e-4ce7-99b2-201fe679b2ef
+      storage.kubernetes.io/csiProvisionerIdentity: 1730210301318-7275-org.democratic-csi.nfs.pool01
+    volumeHandle: sonarr-downloads
+  mountOptions:
+  - noatime
+  - nfsvers=4
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: freenas-nfs-csi-pool1
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sonarr-series
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 14000Gi
+  csi:
+    controllerExpandSecretRef:
+      name: controller-expand-secret-freenas-nfs-csi-pool1-zfs-nfs-democrat
+      namespace: democratic-csi
+    controllerPublishSecretRef:
+      name: controller-publish-secret-freenas-nfs-csi-pool1-zfs-nfs-democra
+      namespace: democratic-csi
+    driver: org.democratic-csi.nfs.pool01
+    fsType: nfs
+    nodePublishSecretRef:
+      name: node-publish-secret-freenas-nfs-csi-pool1-zfs-nfs-democratic-cs
+      namespace: democratic-csi
+    nodeStageSecretRef:
+      name: node-stage-secret-freenas-nfs-csi-pool1-zfs-nfs-democratic-csi
+      namespace: democratic-csi
+    volumeAttributes:
+      node_attach_driver: nfs
+      provisioner_driver: freenas-nfs
+      provisioner_driver_instance_id: truenas
+      server: 192.168.1.200
+      share: /mnt/POOL1/k8s/vols/pvc-6e3a1f69-77d9-4ee8-a44b-affd4582f513
+      storage.kubernetes.io/csiProvisionerIdentity: 1730210301318-7275-org.democratic-csi.nfs.pool01
+    volumeHandle: sonarr-series
+  mountOptions:
+  - noatime
+  - nfsvers=4
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: freenas-nfs-csi-pool1
+  volumeMode: Filesystem
