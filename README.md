@@ -10,7 +10,7 @@ My Homelab is composed of multiple micro-computer branded by Beelink and 1 NAS :
 | Beelink SER5 PRO E  | AMD Ryzen 7 5800H  | 32GB | SSD 500GB / SSD 4TB   |
 | Beelink GTR7 7840HS | GTR7 7840HS        | 32GB | SSD 1TB               |
 | Beelink SER6        | AMD Ryzen 7 7840HS | 32GB | SSD 1TB               |
-| Terramaster F2-424  | CPU N95            | 20GB | SSD 250GB / 2 HDD 8TB |
+| Terramaster F2-424  | CPU N95            | 16GB | SSD 250GB / 2 HDD 8TB |
 
 The Terramaster has been reinstalled with TrueNas using this documentation : [Install Truenas on Terramaster](https://nascompares.com/2022/08/10/how-to-install-truenas-core-on-your-terramaster-nas/). It has been extended with 1 250GB SSD and 1x 16GB of RAM.
 
@@ -31,6 +31,30 @@ System application are deployed using the k3s helmConfig which include :
 - LongHorn
 
 All other applications are or will be deployed using ArgoCD.
+
+## My Applications
+
+My applications that are running on Kubernetes cluster are all available on kubernetes/argocd/values.
+
+Here is the list : 
+
+- cert-manager : permit to automatically generate and renew lets-encrypt certificate for my Endpoints
+- cert-manager-scaleway : generate my dns records for lets-encrypt validation
+- flaresolverr : permit to bypass captcha for some of my indexer
+- homarr : my homepage with all my applications / informations
+- jellyfin : my personal media server for my personal usage of video streaming
+- jellyseerr : movies and series requests
+- prowlarr : global indexers and downloaders configuration for sonarr / radarr
+- qbittorrent : client torrent
+- radarr : retrieve movies from differents indexers, ask my torrent client to download them and sort them correctly in my folders
+- sonarr : same as radarr but for my tv shows
+- scaleway-ddns : dynamique DNS for scaleway
+- truenas : my nas
+- vault : handle my secrets
+- vault-operator : i don't use it finally, can be deleted in future release
+- vault-secrets-webhook : bank-vault webhook that dynamically inject secrets to my application at boot
+
+Each of my application lifecycle is handled by ArgoCD, a single commit and push is necessary to perform an upgrade / modifications.
 
 ## My Vault Configuration
 
