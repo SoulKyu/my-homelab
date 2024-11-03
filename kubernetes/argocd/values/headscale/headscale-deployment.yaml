@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: headscale
+  namespace: headscale
+  labels:
+    app: headscale
+spec:
+  selector:
+    matchLabels:
+      app: headscale
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: headscale
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+    spec:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - name: headscale
+          image: headscale/headscale:0.23.0
+          imagePullPolicy: IfNotPresent
+          command: ["headscale", "serve"]
+          #command: ["serve"]
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: grpc
+              containerPort: 50443
+            - name: metrics
+              containerPort: 9090
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          volumeMounts:
+            - mountPath: /var/run/headscale
+              name: headscale-run
+            - mountPath: /var/lib/headscale
+              name: headscale-config
+            - mountPath: /etc/headscale/config.yaml
+              name: headscale-configyaml
+              subPath: config.yaml
+            #- mountPath: /etc/headscale/acl.yaml
+            #  name: headscale-acl
+            #  subPath: acl.yaml
+          env:
+            - name: TZ
+              value: "UTC"
+      volumes:
+        - name: headscale-run
+          emptyDir: {}
+        - name: headscale-config
+          persistentVolumeClaim:
+            claimName: headscale-config
+        - name: headscale-configyaml
+          configMap:
+            name: configyaml
+        #- name: headscale-acl
+        #  configMap:
+        #    name: headscale-acl
