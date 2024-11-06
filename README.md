@@ -38,9 +38,11 @@ My applications that are running on Kubernetes cluster are all available on kube
 
 Here is the list : 
 
+- bazarr : automatically download subtitle in French when none exist
 - cert-manager : permit to automatically generate and renew lets-encrypt certificate for my Endpoints
 - cert-manager-scaleway : generate my dns records for lets-encrypt validation
 - flaresolverr : permit to bypass captcha for some of my indexer
+- headscale : VPN service that makes the devices and applications you own accessible anywhere in the world, securely and effortlessly. It enables encrypted point-to-point connections using the open source WireGuard protocol, which means only devices on your private network can communicate with each other.
 - homarr : my homepage with all my applications / informations
 - jellyfin : my personal media server for my personal usage of video streaming
 - jellyseerr : movies and series requests
@@ -71,3 +73,11 @@ Actually all my service are registered on Scaleway DNS for private and public ne
 Private Network is only accessible from my Homelab, in the future a Headscale configuration is going to be deployed to allow access from my secure device.
 
 Public Network is available from outside only on port 443 to specific URL that are designed to be publically accessed such as a future portfolio for example.
+
+## What-s next ?
+
+Actually looking to push a PR to support scaleway provider to automatically renew my truenas scale certificate on this project : https://github.com/thde/truenas-scale-acme
+
+Would like to integrate this IA feature : https://github.com/McCloudS/subgen
+- Permit to automatic translation using IA
+- Try to deploy it on Kubernetes using my AMD GPU.
