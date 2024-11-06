@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Configuration
+login={{ lookup('hashi_vault', 'secret=secrets/data/nas url=https://vault.local.soulkyu.net/').username }}
+pass={{ lookup('hashi_vault', 'secret=secrets/data/nas url=https://vault.local.soulkyu.net/').password }}
+host={{ lookup('hashi_vault', 'secret=secrets/data/nas url=https://vault.local.soulkyu.net/').host }}
+remote_dir=downloads/qbittorrent
+local_dir=/mnt/POOL1/k8s/vols/pvc-9e29c621-e42e-4ce7-99b2-201fe679b2ef
+bandwidth_limit=5000000000000  # KB/s
+
+# Log file setup
+log_file="/var/log/rsync_sync.log"
+date_stamp=$(date +%Y-%m-%d_%H-%M-%S)
+
+# Check if rsync is already running
+checkifrunning=$(pgrep -f [r]sync)
+if [[ $checkifrunning ]]; then
+    echo "Sync is already running. PID: $checkifrunning"
+    exit 1
+fi
+
+# Function for logging
+log_message() {
+    echo "$(date): $1" >> "$log_file"
+    echo "$1"
+}
+
+log_message "Starting sync"
+
+# Run rsync with enhanced options
+sshpass -p "$pass" rsync -avz \
+    --progress \
+    --partial \
+    --ignore-existing \
+    --stats \
+    --human-readable \
+    --bwlimit=$bandwidth_limit \
+    --exclude='*.part' \
+    --exclude='*.!ut' \
+    --exclude='*.!qb' \
+    -e "ssh -p 22" \
+    "$login@$host:$remote_dir/" \
+    "$local_dir/" \
+    2>&1 | tee -a "$log_file"
+
+sync_status=$?
+
+if [ $sync_status -eq 0 ]; then
+    log_message "Sync completed successfully"
+else
+    log_message "Sync failed with status $sync_status"
+fi
+
+# Calculate and log transfer statistics
+if [ -f "$log_file" ]; then
+    log_message "Transfer Summary for $date_stamp:"
+    tail -n 20 "$log_file" | grep "sent\|total size" >> "$log_file"
+fi
+
+exit $sync_status

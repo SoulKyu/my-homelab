@@ -76,8 +76,11 @@ Public Network is available from outside only on port 443 to specific URL that a
 
 ## What-s next ?
 
-Actually looking to push a PR to support scaleway provider to automatically renew my truenas scale certificate on this project : https://github.com/thde/truenas-scale-acme
+Actually looking to push a PR to support scaleway provider to automatically renew my truenas scale certificate on this project : [truenas-scale-acme](https://github.com/thde/truenas-scale-acme)
 
-Would like to integrate this IA feature : https://github.com/McCloudS/subgen
+Would like to integrate this IA feature : [subgen](https://github.com/McCloudS/subgen)
 - Permit to automatic translation using IA
 - Try to deploy it on Kubernetes using my AMD GPU.
+
+Using [syncthing](https://github.com/syncthing/syncthing) to synchronize my differents storage location with my local truenas.
+- Actually using a custom bash script running as a cronjob available here : [synchro.sh](./ansible/scripts/synchro.sh.j2)
