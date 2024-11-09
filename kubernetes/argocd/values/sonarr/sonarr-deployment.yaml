@@ -31,7 +31,6 @@ spec:
           resources:
             requests:
               memory: "1024Mi"
-              cpu: "150m"
           volumeMounts:
           - mountPath: /config
             name: sonarr-config
