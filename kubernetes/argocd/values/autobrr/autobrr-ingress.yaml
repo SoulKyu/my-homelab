@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: scaleway
+  labels:
+    app: autobrr
+  name: autobrr
+  namespace: autobrr
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: autobrr.local.soulkyu.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: autobrr
+                port:
+                  number: 7474
+  tls:
+    - hosts:
+      - autobrr.local.soulkyu.net
+      secretName: autobrr.local.soulkyu.net-tls

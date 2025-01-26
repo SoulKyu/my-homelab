@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: scaleway
+    nginx.ingress.kubernetes.io/whitelist-source-range: 0.0.0.0/0
+    nginx.ingress.kubernetes.io/proxy-body-size: "8192m"
+  labels:
+    app: usargentonhb
+  name: usargentonhb
+  namespace: usargentonhb
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: usargentonhb.public.soulkyu.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: usargentonhb
+                port:
+                  number: 8000
+  tls:
+    - hosts:
+      - usargentonhb.public.soulkyu.net
+      secretName: usargentonhb.public.soulkyu.net-tls

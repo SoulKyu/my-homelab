@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: usargentonhb
+  namespace: usargentonhb
+spec:
+  selector:
+    matchLabels:
+      app: usargentonhb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: usargentonhb
+        deployed_by: argocd
+    spec:
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+        - name: usargentonhb
+          image: soulkyu/usargentonhb:latest
+          imagePullPolicy: Always
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: "TZ"
+              value: "Europe/Paris"
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+          - mountPath: /app/media
+            name: usargentonhb-media
+          - mountPath: /app/db
+            name: usargentonhb-db
+      volumes:
+      - persistentVolumeClaim:
+          claimName: usargentonhb-media
+        name: usargentonhb-media
+      - persistentVolumeClaim:
+          claimName: usargentonhb-db
+        name: usargentonhb-db

@@ -1,0 +1,43 @@
+# Password : autobrr123*autobrr
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autobrr
+  namespace: autobrr
+spec:
+  selector:
+    matchLabels:
+      app: autobrr
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: autobrr
+        deployed_by: argocd
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: k3s-server02
+      hostNetwork: true
+      containers:
+        - name: autobrr
+          image: ghcr.io/autobrr/autobrr:latest
+          imagePullPolicy: Always
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: "TZ"
+              value: "Europe/Paris"
+          ports:
+            - containerPort: 7474
+          resources:
+            requests:
+              memory: "512Mi"
+          volumeMounts:
+          - mountPath: /config
+            name: autobrr-config
+      volumes:
+      - persistentVolumeClaim:
+          claimName: autobrr-config
+        name: autobrr-config
