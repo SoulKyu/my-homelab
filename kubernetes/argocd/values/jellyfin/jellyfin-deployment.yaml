@@ -15,7 +15,7 @@ spec:
         deployed_by: argocd
     spec:
       nodeSelector:
-        kubernetes.io/hostname: k3s-server02
+        kubernetes.io/hostname: k3s-server01
       containers:
         - name: jellyfin
           image: lscr.io/linuxserver/jellyfin:latest
