@@ -15,8 +15,6 @@ spec:
         app: prowlarr
         deployed_by: argocd
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: k3s-server02
       hostNetwork: true
       containers:
         - name: prowlarr

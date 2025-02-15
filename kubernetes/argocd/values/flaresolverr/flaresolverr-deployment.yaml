@@ -15,8 +15,6 @@ spec:
         app: flaresolverr
         deployed_by: argocd
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: k3s-server02
       hostNetwork: true
       hostAliases:
       - ip: "104.21.64.76"

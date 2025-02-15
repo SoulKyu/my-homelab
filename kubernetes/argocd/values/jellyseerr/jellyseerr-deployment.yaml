@@ -15,8 +15,6 @@ spec:
         app: jellyseerr
         deployed_by: argocd
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: k3s-server02
       containers:
         - name: jellyseerr
           image: fallenbagel/jellyseerr
